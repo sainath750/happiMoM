@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baby Tracker - HappiMoM</title>
+    <link rel="stylesheet" href="baby-styles.css">
+    <link rel="stylesheet" href="chatbot.css">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo">
+                <h1>💖 HappiMoM</h1>
+            </div>
+            <nav class="main-nav">
+                <a href="calendar.html" class="nav-link">Calendar</a>
+                <a href="pregnancy.html" class="nav-link">Pregnancy</a>
+                <a href="baby.html" class="nav-link active">Baby</a>
+                <a href="profile.html" class="nav-link">Profile</a>
+            </nav>
+            <div class="user-menu">
+                <button class="user-btn">👤</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <!-- Welcome Section -->
+            <section class="welcome-section">
+                <h2>Baby Health & Development 👶</h2>
+                <p>Track your little one's growth, milestones, and health</p>
+            </section>
+
+            <!-- Baby Info Card -->
+            <section class="baby-info-section">
+                <div class="baby-info-card">
+                    <div class="baby-info-icon">👶</div>
+                    <div class="baby-info-content">
+                        <h3>Baby's Age</h3>
+                        <p class="baby-age" id="babyAge">Calculating...</p>
+                        <p class="baby-birth-date" id="babyBirthDate">Set your baby's birth date to get started</p>
+                    </div>
+                    <button class="btn-edit" id="editBabyInfoBtn">Edit</button>
+                </div>
+            </section>
+
+            <!-- Wellness Dashboard -->
+            <section class="wellness-dashboard-section">
+                <div class="section-header">
+                    <h3>📊 Wellness Dashboard</h3>
+                    <p>Overview of your baby's health at a glance</p>
+                </div>
+                <div class="dashboard-grid" id="wellnessDashboard">
+                    <!-- Dashboard cards will be populated by JS -->
+                </div>
+            </section>
+
+            <!-- Growth Charts Section -->
+            <section class="growth-charts-section">
+                <div class="section-header">
+                    <h3>📈 Growth Charts</h3>
+                    <p>Monitor your baby's height, weight, and head circumference</p>
+                </div>
+                <div class="growth-charts-grid">
+                    <div class="growth-chart-card">
+                        <div class="chart-header">
+                            <span class="chart-icon">⚖️</span>
+                            <h4>Weight</h4>
+                        </div>
+                        <div class="chart-content">
+                            <div class="current-value" id="currentWeight">--</div>
+                            <div class="chart-label">Current Weight</div>
+                            <div class="chart-percentile" id="weightPercentile">--</div>
+                        </div>
+                        <button class="btn-log" id="logWeightBtn">Log Weight</button>
+                    </div>
+                    <div class="growth-chart-card">
+                        <div class="chart-header">
+                            <span class="chart-icon">📏</span>
+                            <h4>Height</h4>
+                        </div>
+                        <div class="chart-content">
+                            <div class="current-value" id="currentHeight">--</div>
+                            <div class="chart-label">Current Height</div>
+                            <div class="chart-percentile" id="heightPercentile">--</div>
+                        </div>
+                        <button class="btn-log" id="logHeightBtn">Log Height</button>
+                    </div>
+                    <div class="growth-chart-card">
+                        <div class="chart-header">
+                            <span class="chart-icon">🔵</span>
+                            <h4>Head Circumference</h4>
+                        </div>
+                        <div class="chart-content">
+                            <div class="current-value" id="currentHeadCirc">--</div>
+                            <div class="chart-label">Current Head Circumference</div>
+                            <div class="chart-percentile" id="headCircPercentile">--</div>
+                        </div>
+                        <button class="btn-log" id="logHeadCircBtn">Log Head Circumference</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Milestone Tracking Section -->
+            <section class="milestones-section">
+                <div class="section-header">
+                    <h3>🎯 Milestone Tracking</h3>
+                    <p>Celebrate your baby's developmental achievements</p>
+                </div>
+                <div class="milestones-grid" id="milestonesGrid">
+                    <!-- Milestones will be populated by JS -->
+                </div>
+                <button class="btn-add-milestone" id="addMilestoneBtn">+ Add Milestone</button>
+            </section>
+
+            <!-- Vaccination Schedule Section -->
+            <section class="vaccination-section">
+                <div class="section-header">
+                    <h3>💉 Vaccination Schedule</h3>
+                    <p>Never miss a vaccination with automated reminders</p>
+                </div>
+                <div class="vaccination-list" id="vaccinationList">
+                    <!-- Vaccinations will be populated by JS -->
+                </div>
+            </section>
+
+            <!-- Feeding & Sleep Logs Section -->
+            <section class="feeding-sleep-section">
+                <div class="section-header">
+                    <h3>🍼 Feeding & Sleep Logs</h3>
+                    <p>Track your baby's feeding and sleep patterns</p>
+                </div>
+                <div class="feeding-sleep-grid">
+                    <div class="feeding-card">
+                        <div class="card-header">
+                            <span class="card-icon">🍼</span>
+                            <h4>Today's Feeding</h4>
+                        </div>
+                        <div class="feeding-stats" id="feedingStats">
+                            <div class="stat-item">
+                                <span class="stat-label">Total Feeds</span>
+                                <span class="stat-value" id="totalFeeds">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Total Duration</span>
+                                <span class="stat-value" id="totalFeedingDuration">0 min</span>
+                            </div>
+                        </div>
+                        <button class="btn-log" id="logFeedingBtn">Log Feeding</button>
+                    </div>
+                    <div class="sleep-card">
+                        <div class="card-header">
+                            <span class="card-icon">😴</span>
+                            <h4>Today's Sleep</h4>
+                        </div>
+                        <div class="sleep-stats" id="sleepStats">
+                            <div class="stat-item">
+                                <span class="stat-label">Total Sleep</span>
+                                <span class="stat-value" id="totalSleep">0 hrs</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Naps</span>
+                                <span class="stat-value" id="totalNaps">0</span>
+                            </div>
+                        </div>
+                        <button class="btn-log" id="logSleepBtn">Log Sleep</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Diaper Tracking Section -->
+            <section class="diaper-section">
+                <div class="section-header">
+                    <h3>🧷 Diaper Tracking</h3>
+                    <p>Monitor diaper changes and patterns</p>
+                </div>
+                <div class="diaper-stats-grid">
+                    <div class="diaper-stat-card">
+                        <div class="diaper-icon">💩</div>
+                        <div class="diaper-stat-content">
+                            <h4>Wet Diapers</h4>
+                            <p class="diaper-count" id="wetDiaperCount">0</p>
+                            <p class="diaper-label">Today</p>
+                        </div>
+                    </div>
+                    <div class="diaper-stat-card">
+                        <div class="diaper-icon">💧</div>
+                        <div class="diaper-stat-content">
+                            <h4>Dirty Diapers</h4>
+                            <p class="diaper-count" id="dirtyDiaperCount">0</p>
+                            <p class="diaper-label">Today</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn-log" id="logDiaperBtn">Log Diaper Change</button>
+            </section>
+
+            <!-- Quick Actions -->
+            <section class="quick-actions">
+                <h3>Quick Actions</h3>
+                <div class="action-buttons">
+                    <button class="action-btn" id="viewReportsBtn">
+                        <span class="btn-icon">📊</span>
+                        <span>View Reports</span>
+                    </button>
+                    <button class="action-btn" id="addPhotoBtn">
+                        <span class="btn-icon">📷</span>
+                        <span>Add Photo</span>
+                    </button>
+                    <button class="action-btn" id="addNoteBtn">
+                        <span class="btn-icon">📝</span>
+                        <span>Add Note</span>
+                    </button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Modals -->
+    <!-- Baby Info Modal -->
+    <div class="modal" id="babyInfoModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>Baby Information</h3>
+            <form id="babyInfoForm">
+                <div class="form-group">
+                    <label>Baby's Name</label>
+                    <input type="text" id="babyName" placeholder="Enter baby's name">
+                </div>
+                <div class="form-group">
+                    <label>Birth Date *</label>
+                    <input type="date" id="babyBirthDateInput" required>
+                </div>
+                <div class="form-group">
+                    <label>Gender</label>
+                    <select id="babyGender">
+                        <option value="">Select gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Birth Weight (kg)</label>
+                    <input type="number" id="birthWeight" step="0.01" min="0.5" max="6" placeholder="e.g., 3.2">
+                </div>
+                <div class="form-group">
+                    <label>Birth Height (cm)</label>
+                    <input type="number" id="birthHeight" step="0.1" min="30" max="60" placeholder="e.g., 50">
+                </div>
+                <button type="submit" class="btn-primary">Save</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Log Weight Modal -->
+    <div class="modal" id="weightModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>Log Weight</h3>
+            <form id="weightForm">
+                <div class="form-group">
+                    <label>Date</label>
+                    <input type="date" id="weightDate" required>
+                </div>
+                <div class="form-group">
+                    <label>Weight (kg)</label>
+                    <input type="number" id="weightValue" step="0.01" min="0.5" max="20" required placeholder="e.g., 5.2">
+                </div>
+                <button type="submit" class="btn-primary">Save</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Log Height Modal -->
+    <div class="modal" id="heightModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>Log Height</h3>
+            <form id="heightForm">
+                <div class="form-group">
+                    <label>Date</label>
+                    <input type="date" id="heightDate" required>
+                </div>
+                <div class="form-group">
+                    <label>Height (cm)</label>
+                    <input type="number" id="heightValue" step="0.1" min="30" max="120" required placeholder="e.g., 65.5">
+                </div>
+                <button type="submit" class="btn-primary">Save</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Log Head Circumference Modal -->
+    <div class="modal" id="headCircModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>Log Head Circumference</h3>
+            <form id="headCircForm">
+                <div class="form-group">
+                    <label>Date</label>
+                    <input type="date" id="headCircDate" required>
+                </div>
+                <div class="form-group">
+                    <label>Head Circumference (cm)</label>
+                    <input type="number" id="headCircValue" step="0.1" min="25" max="60" required placeholder="e.g., 40.5">
+                </div>
+                <button type="submit" class="btn-primary">Save</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Milestone Modal -->
+    <div class="modal" id="milestoneModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>Add Milestone</h3>
+            <form id="milestoneForm">
+                <div class="form-group">
+                    <label>Date</label>
+                    <input type="date" id="milestoneDate" required>
+                </div>
+                <div class="form-group">
+                    <label>Milestone</label>
+                    <select id="milestoneType" required>
+                        <option value="">Select milestone</option>
+                        <option value="first-smile">First Smile</option>
+                        <option value="first-laugh">First Laugh</option>
+                        <option value="roll-over">Roll Over</option>
+                        <option value="sit-up">Sit Up</option>
+                        <option value="crawl">Crawl</option>
+                        <option value="first-word">First Word</option>
+                        <option value="stand">Stand</option>
+                        <option value="walk">First Steps</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Notes (optional)</label>
+                    <textarea id="milestoneNotes" rows="3" placeholder="Add any notes about this milestone"></textarea>
+                </div>
+                <button type="submit" class="btn-primary">Save</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Log Feeding Modal -->
+    <div class="modal" id="feedingModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>Log Feeding</h3>
+            <form id="feedingForm">
+                <div class="form-group">
+                    <label>Date & Time</label>
+                    <input type="datetime-local" id="feedingDateTime" required>
+                </div>
+                <div class="form-group">
+                    <label>Feeding Type</label>
+                    <select id="feedingType" required>
+                        <option value="breastfeeding">Breastfeeding</option>
+                        <option value="bottle">Bottle</option>
+                        <option value="solid">Solid Food</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Duration (minutes)</label>
+                    <input type="number" id="feedingDuration" min="1" max="60" placeholder="e.g., 15">
+                </div>
+                <div class="form-group">
+                    <label>Amount (ml) - for bottle/solid</label>
+                    <input type="number" id="feedingAmount" min="0" max="500" placeholder="e.g., 120">
+                </div>
+                <button type="submit" class="btn-primary">Save</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Log Sleep Modal -->
+    <div class="modal" id="sleepModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>Log Sleep</h3>
+            <form id="sleepForm">
+                <div class="form-group">
+                    <label>Start Time</label>
+                    <input type="datetime-local" id="sleepStart" required>
+                </div>
+                <div class="form-group">
+                    <label>End Time</label>
+                    <input type="datetime-local" id="sleepEnd" required>
+                </div>
+                <div class="form-group">
+                    <label>Sleep Type</label>
+                    <select id="sleepType" required>
+                        <option value="nap">Nap</option>
+                        <option value="night">Night Sleep</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary">Save</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Log Diaper Modal -->
+    <div class="modal" id="diaperModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>Log Diaper Change</h3>
+            <form id="diaperForm">
+                <div class="form-group">
+                    <label>Date & Time</label>
+                    <input type="datetime-local" id="diaperDateTime" required>
+                </div>
+                <div class="form-group">
+                    <label>Diaper Type</label>
+                    <select id="diaperType" required>
+                        <option value="wet">Wet</option>
+                        <option value="dirty">Dirty</option>
+                        <option value="both">Both</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Notes (optional)</label>
+                    <textarea id="diaperNotes" rows="2" placeholder="Any additional notes"></textarea>
+                </div>
+                <button type="submit" class="btn-primary">Save</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Chatbot -->
+    <button id="chatbotButton">💬</button>
+    <div id="chatbotWindow">
+        <div class="chatbot-header">
+            <h3>💖 HappiMoM Assistant</h3>
+            <button class="close-btn" id="closeChat">×</button>
+        </div>
+        <div id="chatMessages"></div>
+        <div class="chatbot-input-area">
+            <input type="text" id="messageInput" placeholder="Ask me anything about HappiMoM...">
+            <button id="sendMessage">➤</button>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="baby.js"></script>
+    <script src="chatbot.js"></script>
+</body>
+</html>
+

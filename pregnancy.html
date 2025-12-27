@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pregnancy Tracker - HappiMoM</title>
+    <link rel="stylesheet" href="pregnancy-styles.css">
+    <link rel="stylesheet" href="chatbot.css">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo">
+                <h1>💖 HappiMoM</h1>
+            </div>
+            <nav class="main-nav">
+                <a href="calendar.html" class="nav-link">Calendar</a>
+                <a href="pregnancy.html" class="nav-link active">Pregnancy</a>
+                <a href="baby.html" class="nav-link">Baby</a>
+                <a href="#" class="nav-link">Profile</a>
+            </nav>
+            <div class="user-menu">
+                <button class="user-btn">👤</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <!-- Welcome Section -->
+            <section class="welcome-section">
+                <h2>Your Pregnancy Journey 🤰</h2>
+                <p>Daily updates, tips, and guidance for you and your baby</p>
+            </section>
+
+            <!-- EDD Calculator & Progress Card -->
+            <section class="progress-section">
+                <div class="edd-card">
+                    <div class="edd-icon">📅</div>
+                    <div class="edd-content">
+                        <h3>Estimated Due Date</h3>
+                        <p class="edd-date" id="eddDate">Calculating...</p>
+                        <p class="edd-days" id="daysRemaining">Based on your last period</p>
+                    </div>
+                    <button class="btn-edit" id="editEDDBtn">Edit</button>
+                </div>
+
+                <div class="progress-card">
+                    <div class="progress-info">
+                        <h3>Pregnancy Progress</h3>
+                        <div class="progress-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">Week</span>
+                                <span class="stat-value" id="currentWeek">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Day</span>
+                                <span class="stat-value" id="currentDay">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Trimester</span>
+                                <span class="stat-value" id="currentTrimester">1st</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" id="progressBar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <p class="progress-text" id="progressText">0% Complete</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Daily Update Section -->
+            <section class="daily-update-section">
+                <div class="section-header">
+                    <h3>📆 Today's Update</h3>
+                    <p class="update-date" id="todayDate"></p>
+                </div>
+
+                <div class="daily-content-grid">
+                    <!-- Baby Development -->
+                    <div class="update-card baby-card">
+                        <div class="card-header">
+                            <span class="card-icon">👶</span>
+                            <h4>Your Baby Today</h4>
+                        </div>
+                        <div class="baby-size">
+                            <span class="size-comparison" id="babySize">Size of a poppy seed</span>
+                        </div>
+                        <div class="update-content" id="babyDevelopment">
+                            <p>Your baby is developing rapidly...</p>
+                        </div>
+                        <div class="development-milestones" id="babyMilestones">
+                            <!-- Milestones will be populated by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Mother's Body -->
+                    <div class="update-card mother-card">
+                        <div class="card-header">
+                            <span class="card-icon">💖</span>
+                            <h4>Your Body Today</h4>
+                        </div>
+                        <div class="update-content" id="motherBody">
+                            <p>Your body is going through amazing changes...</p>
+                        </div>
+                        <div class="body-changes" id="bodyChanges">
+                            <!-- Changes will be populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Daily Tips Section -->
+            <section class="daily-tips-section">
+                <div class="section-header">
+                    <h3>💡 Daily Tips & Guidance</h3>
+                    <p>Personalized advice for you and your baby</p>
+                </div>
+
+                <div class="tips-grid">
+                    <!-- Tips for Mother -->
+                    <div class="tips-card tips-mother">
+                        <div class="tips-header">
+                            <span class="tips-icon">🤰</span>
+                            <h4>Tips for You</h4>
+                        </div>
+                        <ul class="tips-list" id="motherTips">
+                            <!-- Tips will be populated by JS -->
+                        </ul>
+                    </div>
+
+                    <!-- Tips for Baby -->
+                    <div class="tips-card tips-baby">
+                        <div class="tips-header">
+                            <span class="tips-icon">👶</span>
+                            <h4>Tips for Baby's Development</h4>
+                        </div>
+                        <ul class="tips-list" id="babyTips">
+                            <!-- Tips will be populated by JS -->
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Week-by-Week Journey -->
+            <section class="week-journey-section">
+                <div class="section-header">
+                    <h3>🔄 Week-by-Week Journey</h3>
+                    <p>Track your progress through each week</p>
+                </div>
+
+                <div class="week-selector">
+                    <button class="week-nav-btn" id="prevWeekBtn">← Previous Week</button>
+                    <div class="current-week-display">
+                        <span class="week-label">Week</span>
+                        <span class="week-number" id="displayWeek">1</span>
+                    </div>
+                    <button class="week-nav-btn" id="nextWeekBtn">Next Week →</button>
+                </div>
+
+                <div class="week-details-card">
+                    <div class="week-overview" id="weekOverview">
+                        <!-- Week details will be populated by JS -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Reminders & Notifications -->
+            <section class="reminders-section">
+                <div class="section-header">
+                    <h3>🔔 Upcoming Reminders</h3>
+                </div>
+
+                <div class="reminders-list" id="remindersList">
+                    <!-- Reminders will be populated by JS -->
+                </div>
+            </section>
+
+            <!-- Health Check Notifications -->
+            <section class="health-checks-section">
+                <div class="section-header">
+                    <h3>🏥 Health Check Notifications</h3>
+                </div>
+
+                <div class="health-checks-grid" id="healthChecksGrid">
+                    <!-- Health checks will be populated by JS -->
+                </div>
+            </section>
+
+            <!-- Pregnancy Journal -->
+            <section class="journal-section">
+                <div class="section-header">
+                    <h3>📔 Pregnancy Journal</h3>
+                    <button class="btn-add-entry" id="addJournalEntryBtn">+ Add Entry</button>
+                </div>
+
+                <div class="journal-entries" id="journalEntries">
+                    <!-- Journal entries will be populated by JS -->
+                </div>
+            </section>
+
+            <!-- Quick Actions -->
+            <section class="quick-actions">
+                <h3>Quick Actions</h3>
+                <div class="action-buttons">
+                    <button class="action-btn" id="logSymptomBtn">
+                        <span class="btn-icon">📝</span>
+                        <span>Log Symptom</span>
+                    </button>
+                    <button class="action-btn" id="logWeightBtn">
+                        <span class="btn-icon">⚖️</span>
+                        <span>Log Weight</span>
+                    </button>
+                    <button class="action-btn" id="addPhotoBtn">
+                        <span class="btn-icon">📷</span>
+                        <span>Add Photo</span>
+                    </button>
+                    <button class="action-btn" id="viewReportsBtn">
+                        <span class="btn-icon">📊</span>
+                        <span>View Reports</span>
+                    </button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Modals -->
+    <!-- EDD Calculator Modal -->
+    <div class="modal" id="eddModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>Calculate Your Due Date</h3>
+            <form id="eddForm">
+                <div class="form-group">
+                    <label>Last Menstrual Period (LMP) Date</label>
+                    <input type="date" id="lmpDate" required>
+                </div>
+                <div class="form-group">
+                    <label>Or, if you know your conception date</label>
+                    <input type="date" id="conceptionDate">
+                </div>
+                <p class="form-note">We'll calculate your EDD based on your LMP (typically 40 weeks from LMP)</p>
+                <button type="submit" class="btn-primary">Calculate EDD</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Journal Entry Modal -->
+    <div class="modal" id="journalModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>Add Journal Entry</h3>
+            <form id="journalForm">
+                <div class="form-group">
+                    <label>Date</label>
+                    <input type="date" id="journalDate" required>
+                </div>
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" id="journalTitle" placeholder="How are you feeling today?" required>
+                </div>
+                <div class="form-group">
+                    <label>Entry</label>
+                    <textarea id="journalEntry" rows="6" placeholder="Write about your pregnancy journey..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Add Photo (optional)</label>
+                    <input type="file" id="journalPhoto" accept="image/*">
+                </div>
+                <button type="submit" class="btn-primary">Save Entry</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Log Symptom Modal -->
+    <div class="modal" id="symptomModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>Log Symptom</h3>
+            <form id="symptomForm">
+                <div class="form-group">
+                    <label>Date</label>
+                    <input type="date" id="symptomDate" required>
+                </div>
+                <div class="form-group">
+                    <label>Symptom</label>
+                    <select id="symptomType" required>
+                        <option value="nausea">Nausea</option>
+                        <option value="fatigue">Fatigue</option>
+                        <option value="cramps">Cramps</option>
+                        <option value="backache">Backache</option>
+                        <option value="headache">Headache</option>
+                        <option value="mood">Mood Changes</option>
+                        <option value="swelling">Swelling</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Severity</label>
+                    <select id="symptomSeverity" required>
+                        <option value="mild">Mild</option>
+                        <option value="moderate">Moderate</option>
+                        <option value="severe">Severe</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary">Save</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Chatbot -->
+    <button id="chatbotButton">💬</button>
+    <div id="chatbotWindow">
+        <div class="chatbot-header">
+            <h3>💖 HappiMoM Assistant</h3>
+            <button class="close-btn" id="closeChat">×</button>
+        </div>
+        <div id="chatMessages"></div>
+        <div class="chatbot-input-area">
+            <input type="text" id="messageInput" placeholder="Ask me anything about HappiMoM...">
+            <button id="sendMessage">➤</button>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="pregnancy.js"></script>
+    <script src="chatbot.js"></script>
+</body>
+</html>
+
